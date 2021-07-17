@@ -24,8 +24,8 @@ Map<String, dynamic> _$_$_Covid19ResponseToJson(_$_Covid19Response instance) =>
 _$_Covid19ErrorResponse _$_$_Covid19ErrorResponseFromJson(
     Map<String, dynamic> json) {
   return _$_Covid19ErrorResponse(
-    json['errorFlag'] as int,
-    json['errorCode'] as int?,
+    json['errorFlag'] as String,
+    json['errorCode'] as String?,
     json['errorMessage'] as String?,
   );
 }

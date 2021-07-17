@@ -209,7 +209,7 @@ class _$Covid19ErrorResponseTearOff {
   const _$Covid19ErrorResponseTearOff();
 
   _Covid19ErrorResponse call(
-      int errorFlag, int? errorCode, String? errorMessage) {
+      String errorFlag, String? errorCode, String? errorMessage) {
     return _Covid19ErrorResponse(
       errorFlag,
       errorCode,
@@ -227,8 +227,8 @@ const $Covid19ErrorResponse = _$Covid19ErrorResponseTearOff();
 
 /// @nodoc
 mixin _$Covid19ErrorResponse {
-  int get errorFlag => throw _privateConstructorUsedError;
-  int? get errorCode => throw _privateConstructorUsedError;
+  String get errorFlag => throw _privateConstructorUsedError;
+  String? get errorCode => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -242,7 +242,7 @@ abstract class $Covid19ErrorResponseCopyWith<$Res> {
   factory $Covid19ErrorResponseCopyWith(Covid19ErrorResponse value,
           $Res Function(Covid19ErrorResponse) then) =
       _$Covid19ErrorResponseCopyWithImpl<$Res>;
-  $Res call({int errorFlag, int? errorCode, String? errorMessage});
+  $Res call({String errorFlag, String? errorCode, String? errorMessage});
 }
 
 /// @nodoc
@@ -264,11 +264,11 @@ class _$Covid19ErrorResponseCopyWithImpl<$Res>
       errorFlag: errorFlag == freezed
           ? _value.errorFlag
           : errorFlag // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       errorCode: errorCode == freezed
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       errorMessage: errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -284,7 +284,7 @@ abstract class _$Covid19ErrorResponseCopyWith<$Res>
           $Res Function(_Covid19ErrorResponse) then) =
       __$Covid19ErrorResponseCopyWithImpl<$Res>;
   @override
-  $Res call({int errorFlag, int? errorCode, String? errorMessage});
+  $Res call({String errorFlag, String? errorCode, String? errorMessage});
 }
 
 /// @nodoc
@@ -308,11 +308,11 @@ class __$Covid19ErrorResponseCopyWithImpl<$Res>
       errorFlag == freezed
           ? _value.errorFlag
           : errorFlag // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       errorCode == freezed
           ? _value.errorCode
           : errorCode // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       errorMessage == freezed
           ? _value.errorMessage
           : errorMessage // ignore: cast_nullable_to_non_nullable
@@ -330,9 +330,9 @@ class _$_Covid19ErrorResponse implements _Covid19ErrorResponse {
       _$_$_Covid19ErrorResponseFromJson(json);
 
   @override
-  final int errorFlag;
+  final String errorFlag;
   @override
-  final int? errorCode;
+  final String? errorCode;
   @override
   final String? errorMessage;
 
@@ -377,16 +377,16 @@ class _$_Covid19ErrorResponse implements _Covid19ErrorResponse {
 
 abstract class _Covid19ErrorResponse implements Covid19ErrorResponse {
   factory _Covid19ErrorResponse(
-          int errorFlag, int? errorCode, String? errorMessage) =
+          String errorFlag, String? errorCode, String? errorMessage) =
       _$_Covid19ErrorResponse;
 
   factory _Covid19ErrorResponse.fromJson(Map<String, dynamic> json) =
       _$_Covid19ErrorResponse.fromJson;
 
   @override
-  int get errorFlag => throw _privateConstructorUsedError;
+  String get errorFlag => throw _privateConstructorUsedError;
   @override
-  int? get errorCode => throw _privateConstructorUsedError;
+  String? get errorCode => throw _privateConstructorUsedError;
   @override
   String? get errorMessage => throw _privateConstructorUsedError;
   @override

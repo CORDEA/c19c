@@ -17,8 +17,8 @@ class Covid19Response with _$Covid19Response {
 @freezed
 class Covid19ErrorResponse with _$Covid19ErrorResponse {
   factory Covid19ErrorResponse(
-    int errorFlag,
-    int? errorCode,
+    String errorFlag,
+    String? errorCode,
     String? errorMessage,
   ) = _Covid19ErrorResponse;
 
