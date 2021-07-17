@@ -43,7 +43,7 @@ _$_Covid19ItemResponse _$_$_Covid19ItemResponseFromJson(
   return _$_Covid19ItemResponse(
     json['date'] as String,
     json['name_jp'] as String,
-    json['npatients'],
+    json['npatients'] as int,
   );
 }
 

@@ -31,7 +31,7 @@ class Covid19ItemResponse with _$Covid19ItemResponse {
   factory Covid19ItemResponse(
     String date,
     @JsonKey(name: 'name_jp') String name,
-    @JsonKey(name: 'npatients') numberOfPatients,
+    @JsonKey(name: 'npatients') int numberOfPatients,
   ) = _Covid19ItemResponse;
 
   factory Covid19ItemResponse.fromJson(Map<String, dynamic> json) =>

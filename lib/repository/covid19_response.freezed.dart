@@ -404,7 +404,7 @@ class _$Covid19ItemResponseTearOff {
   const _$Covid19ItemResponseTearOff();
 
   _Covid19ItemResponse call(String date, @JsonKey(name: 'name_jp') String name,
-      @JsonKey(name: 'npatients') dynamic numberOfPatients) {
+      @JsonKey(name: 'npatients') int numberOfPatients) {
     return _Covid19ItemResponse(
       date,
       name,
@@ -426,7 +426,7 @@ mixin _$Covid19ItemResponse {
   @JsonKey(name: 'name_jp')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'npatients')
-  dynamic get numberOfPatients => throw _privateConstructorUsedError;
+  int get numberOfPatients => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -442,7 +442,7 @@ abstract class $Covid19ItemResponseCopyWith<$Res> {
   $Res call(
       {String date,
       @JsonKey(name: 'name_jp') String name,
-      @JsonKey(name: 'npatients') dynamic numberOfPatients});
+      @JsonKey(name: 'npatients') int numberOfPatients});
 }
 
 /// @nodoc
@@ -472,7 +472,7 @@ class _$Covid19ItemResponseCopyWithImpl<$Res>
       numberOfPatients: numberOfPatients == freezed
           ? _value.numberOfPatients
           : numberOfPatients // ignore: cast_nullable_to_non_nullable
-              as dynamic,
+              as int,
     ));
   }
 }
@@ -487,7 +487,7 @@ abstract class _$Covid19ItemResponseCopyWith<$Res>
   $Res call(
       {String date,
       @JsonKey(name: 'name_jp') String name,
-      @JsonKey(name: 'npatients') dynamic numberOfPatients});
+      @JsonKey(name: 'npatients') int numberOfPatients});
 }
 
 /// @nodoc
@@ -516,7 +516,10 @@ class __$Covid19ItemResponseCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      numberOfPatients == freezed ? _value.numberOfPatients : numberOfPatients,
+      numberOfPatients == freezed
+          ? _value.numberOfPatients
+          : numberOfPatients // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -537,7 +540,7 @@ class _$_Covid19ItemResponse implements _Covid19ItemResponse {
   final String name;
   @override
   @JsonKey(name: 'npatients')
-  final dynamic numberOfPatients;
+  final int numberOfPatients;
 
   @override
   String toString() {
@@ -580,7 +583,7 @@ abstract class _Covid19ItemResponse implements Covid19ItemResponse {
   factory _Covid19ItemResponse(
           String date,
           @JsonKey(name: 'name_jp') String name,
-          @JsonKey(name: 'npatients') dynamic numberOfPatients) =
+          @JsonKey(name: 'npatients') int numberOfPatients) =
       _$_Covid19ItemResponse;
 
   factory _Covid19ItemResponse.fromJson(Map<String, dynamic> json) =
@@ -593,7 +596,7 @@ abstract class _Covid19ItemResponse implements Covid19ItemResponse {
   String get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'npatients')
-  dynamic get numberOfPatients => throw _privateConstructorUsedError;
+  int get numberOfPatients => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$Covid19ItemResponseCopyWith<_Covid19ItemResponse> get copyWith =>
