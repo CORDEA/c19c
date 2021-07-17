@@ -1,9 +1,14 @@
+import 'package:c19c/ui/home_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return _HomePage();
+    return MultiProvider(
+      providers: [homeViewModelProvider],
+      child: _HomePage(),
+    );
   }
 }
 
