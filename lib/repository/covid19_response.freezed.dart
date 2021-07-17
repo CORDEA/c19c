@@ -404,11 +404,11 @@ class _$Covid19ItemResponseTearOff {
   const _$Covid19ItemResponseTearOff();
 
   _Covid19ItemResponse call(String date, @JsonKey(name: 'name_jp') String name,
-      @JsonKey(name: 'npatients') int numberOfPatients) {
+      @JsonKey(name: 'npatients') String rawNumberOfPatients) {
     return _Covid19ItemResponse(
       date,
       name,
-      numberOfPatients,
+      rawNumberOfPatients,
     );
   }
 
@@ -426,7 +426,7 @@ mixin _$Covid19ItemResponse {
   @JsonKey(name: 'name_jp')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'npatients')
-  int get numberOfPatients => throw _privateConstructorUsedError;
+  String get rawNumberOfPatients => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -442,7 +442,7 @@ abstract class $Covid19ItemResponseCopyWith<$Res> {
   $Res call(
       {String date,
       @JsonKey(name: 'name_jp') String name,
-      @JsonKey(name: 'npatients') int numberOfPatients});
+      @JsonKey(name: 'npatients') String rawNumberOfPatients});
 }
 
 /// @nodoc
@@ -458,7 +458,7 @@ class _$Covid19ItemResponseCopyWithImpl<$Res>
   $Res call({
     Object? date = freezed,
     Object? name = freezed,
-    Object? numberOfPatients = freezed,
+    Object? rawNumberOfPatients = freezed,
   }) {
     return _then(_value.copyWith(
       date: date == freezed
@@ -469,10 +469,10 @@ class _$Covid19ItemResponseCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      numberOfPatients: numberOfPatients == freezed
-          ? _value.numberOfPatients
-          : numberOfPatients // ignore: cast_nullable_to_non_nullable
-              as int,
+      rawNumberOfPatients: rawNumberOfPatients == freezed
+          ? _value.rawNumberOfPatients
+          : rawNumberOfPatients // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -487,7 +487,7 @@ abstract class _$Covid19ItemResponseCopyWith<$Res>
   $Res call(
       {String date,
       @JsonKey(name: 'name_jp') String name,
-      @JsonKey(name: 'npatients') int numberOfPatients});
+      @JsonKey(name: 'npatients') String rawNumberOfPatients});
 }
 
 /// @nodoc
@@ -505,7 +505,7 @@ class __$Covid19ItemResponseCopyWithImpl<$Res>
   $Res call({
     Object? date = freezed,
     Object? name = freezed,
-    Object? numberOfPatients = freezed,
+    Object? rawNumberOfPatients = freezed,
   }) {
     return _then(_Covid19ItemResponse(
       date == freezed
@@ -516,19 +516,20 @@ class __$Covid19ItemResponseCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      numberOfPatients == freezed
-          ? _value.numberOfPatients
-          : numberOfPatients // ignore: cast_nullable_to_non_nullable
-              as int,
+      rawNumberOfPatients == freezed
+          ? _value.rawNumberOfPatients
+          : rawNumberOfPatients // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_Covid19ItemResponse implements _Covid19ItemResponse {
+class _$_Covid19ItemResponse extends _Covid19ItemResponse {
   _$_Covid19ItemResponse(this.date, @JsonKey(name: 'name_jp') this.name,
-      @JsonKey(name: 'npatients') this.numberOfPatients);
+      @JsonKey(name: 'npatients') this.rawNumberOfPatients)
+      : super._();
 
   factory _$_Covid19ItemResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_Covid19ItemResponseFromJson(json);
@@ -540,11 +541,11 @@ class _$_Covid19ItemResponse implements _Covid19ItemResponse {
   final String name;
   @override
   @JsonKey(name: 'npatients')
-  final int numberOfPatients;
+  final String rawNumberOfPatients;
 
   @override
   String toString() {
-    return 'Covid19ItemResponse(date: $date, name: $name, numberOfPatients: $numberOfPatients)';
+    return 'Covid19ItemResponse(date: $date, name: $name, rawNumberOfPatients: $rawNumberOfPatients)';
   }
 
   @override
@@ -555,9 +556,9 @@ class _$_Covid19ItemResponse implements _Covid19ItemResponse {
                 const DeepCollectionEquality().equals(other.date, date)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.numberOfPatients, numberOfPatients) ||
+            (identical(other.rawNumberOfPatients, rawNumberOfPatients) ||
                 const DeepCollectionEquality()
-                    .equals(other.numberOfPatients, numberOfPatients)));
+                    .equals(other.rawNumberOfPatients, rawNumberOfPatients)));
   }
 
   @override
@@ -565,7 +566,7 @@ class _$_Covid19ItemResponse implements _Covid19ItemResponse {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(date) ^
       const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(numberOfPatients);
+      const DeepCollectionEquality().hash(rawNumberOfPatients);
 
   @JsonKey(ignore: true)
   @override
@@ -579,12 +580,13 @@ class _$_Covid19ItemResponse implements _Covid19ItemResponse {
   }
 }
 
-abstract class _Covid19ItemResponse implements Covid19ItemResponse {
+abstract class _Covid19ItemResponse extends Covid19ItemResponse {
   factory _Covid19ItemResponse(
           String date,
           @JsonKey(name: 'name_jp') String name,
-          @JsonKey(name: 'npatients') int numberOfPatients) =
+          @JsonKey(name: 'npatients') String rawNumberOfPatients) =
       _$_Covid19ItemResponse;
+  _Covid19ItemResponse._() : super._();
 
   factory _Covid19ItemResponse.fromJson(Map<String, dynamic> json) =
       _$_Covid19ItemResponse.fromJson;
@@ -596,7 +598,7 @@ abstract class _Covid19ItemResponse implements Covid19ItemResponse {
   String get name => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'npatients')
-  int get numberOfPatients => throw _privateConstructorUsedError;
+  String get rawNumberOfPatients => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$Covid19ItemResponseCopyWith<_Covid19ItemResponse> get copyWith =>

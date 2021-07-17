@@ -43,7 +43,7 @@ _$_Covid19ItemResponse _$_$_Covid19ItemResponseFromJson(
   return _$_Covid19ItemResponse(
     json['date'] as String,
     json['name_jp'] as String,
-    json['npatients'] as int,
+    json['npatients'] as String,
   );
 }
 
@@ -52,5 +52,5 @@ Map<String, dynamic> _$_$_Covid19ItemResponseToJson(
     <String, dynamic>{
       'date': instance.date,
       'name_jp': instance.name,
-      'npatients': instance.numberOfPatients,
+      'npatients': instance.rawNumberOfPatients,
     };
