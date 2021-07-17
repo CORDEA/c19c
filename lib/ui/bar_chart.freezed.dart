@@ -114,8 +114,8 @@ class __$BarChartSeriesCopyWithImpl<X extends Comparable<X>, $Res>
 
 /// @nodoc
 
-class _$_BarChartSeries<X extends Comparable<X>> implements _BarChartSeries<X> {
-  _$_BarChartSeries(this.color, this.points);
+class _$_BarChartSeries<X extends Comparable<X>> extends _BarChartSeries<X> {
+  _$_BarChartSeries(this.color, this.points) : super._();
 
   @override
   final Color color;
@@ -150,9 +150,10 @@ class _$_BarChartSeries<X extends Comparable<X>> implements _BarChartSeries<X> {
 }
 
 abstract class _BarChartSeries<X extends Comparable<X>>
-    implements BarChartSeries<X> {
+    extends BarChartSeries<X> {
   factory _BarChartSeries(Color color, List<BarChartPoint<X>> points) =
       _$_BarChartSeries<X>;
+  _BarChartSeries._() : super._();
 
   @override
   Color get color => throw _privateConstructorUsedError;

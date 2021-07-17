@@ -23,11 +23,35 @@ class BarChart<X extends Comparable<X>> extends StatelessWidget {
 class _BarChartPainter<X extends Comparable<X>> extends CustomPainter {
   _BarChartPainter(this._chartSeries);
 
+  static const _barMarginBias = 0.3;
+
   final BarChartSeries<X> _chartSeries;
+  late final _paint = Paint()..color = _chartSeries.color;
 
   @override
   void paint(Canvas canvas, Size size) {
-    // TODO: implement paint
+    if (size.isEmpty || _chartSeries.points.isEmpty) {
+      return;
+    }
+
+    final bars = _chartSeries.points.length;
+    final totalMargin = size.width * _barMarginBias;
+    final margin = totalMargin / (bars - 1);
+    final barSize = (size.width - totalMargin) / bars;
+    final yBasis = size.height / _chartSeries.maxY();
+
+    var x = 0.0;
+    for (final point in _chartSeries.points) {
+      final rect = RRect.fromLTRBR(
+        x,
+        size.height - (yBasis * point.y),
+        x + barSize,
+        size.height,
+        Radius.circular(2),
+      );
+      canvas.drawRRect(rect, _paint);
+      x += margin + barSize;
+    }
   }
 
   @override
@@ -40,8 +64,12 @@ class _BarChartPainter<X extends Comparable<X>> extends CustomPainter {
 
 @freezed
 class BarChartSeries<X extends Comparable<X>> with _$BarChartSeries<X> {
+  BarChartSeries._();
+
   factory BarChartSeries(Color color, List<BarChartPoint<X>> points) =
       _BarChartSeries<X>;
+
+  num maxY() => points.map((e) => e.y).max;
 }
 
 @freezed
