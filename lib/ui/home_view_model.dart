@@ -6,7 +6,21 @@ final homeViewModelProvider = ProxyProvider<Covid19Repository, HomeViewModel>(
 );
 
 class HomeViewModel {
-  HomeViewModel(this._repository);
+  HomeViewModel(this._repository) {
+    _load(forceRefresh: false);
+  }
 
   final Covid19Repository _repository;
+
+  Future<void> _load({required bool forceRefresh}) async {
+    try {
+      final items = await _repository.findAll(
+        dataName: null,
+        date: null,
+        forceRefresh: forceRefresh,
+      );
+    } catch (_) {
+      return;
+    }
+  }
 }
