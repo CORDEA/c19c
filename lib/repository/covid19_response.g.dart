@@ -41,7 +41,7 @@ Map<String, dynamic> _$_$_Covid19ErrorResponseToJson(
 _$_Covid19ItemResponse _$_$_Covid19ItemResponseFromJson(
     Map<String, dynamic> json) {
   return _$_Covid19ItemResponse(
-    json['rawDate'] as String,
+    json['date'] as String,
     json['name_jp'] as String,
     json['npatients'] as String,
   );
@@ -50,7 +50,7 @@ _$_Covid19ItemResponse _$_$_Covid19ItemResponseFromJson(
 Map<String, dynamic> _$_$_Covid19ItemResponseToJson(
         _$_Covid19ItemResponse instance) =>
     <String, dynamic>{
-      'rawDate': instance.rawDate,
+      'date': instance.rawDate,
       'name_jp': instance.name,
       'npatients': instance.rawNumberOfPatients,
     };

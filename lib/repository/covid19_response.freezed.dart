@@ -404,7 +404,7 @@ class _$Covid19ItemResponseTearOff {
   const _$Covid19ItemResponseTearOff();
 
   _Covid19ItemResponse call(
-      String rawDate,
+      @JsonKey(name: 'date') String rawDate,
       @JsonKey(name: 'name_jp') String name,
       @JsonKey(name: 'npatients') String rawNumberOfPatients) {
     return _Covid19ItemResponse(
@@ -424,6 +424,7 @@ const $Covid19ItemResponse = _$Covid19ItemResponseTearOff();
 
 /// @nodoc
 mixin _$Covid19ItemResponse {
+  @JsonKey(name: 'date')
   String get rawDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'name_jp')
   String get name => throw _privateConstructorUsedError;
@@ -442,7 +443,7 @@ abstract class $Covid19ItemResponseCopyWith<$Res> {
           Covid19ItemResponse value, $Res Function(Covid19ItemResponse) then) =
       _$Covid19ItemResponseCopyWithImpl<$Res>;
   $Res call(
-      {String rawDate,
+      {@JsonKey(name: 'date') String rawDate,
       @JsonKey(name: 'name_jp') String name,
       @JsonKey(name: 'npatients') String rawNumberOfPatients});
 }
@@ -487,7 +488,7 @@ abstract class _$Covid19ItemResponseCopyWith<$Res>
       __$Covid19ItemResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String rawDate,
+      {@JsonKey(name: 'date') String rawDate,
       @JsonKey(name: 'name_jp') String name,
       @JsonKey(name: 'npatients') String rawNumberOfPatients});
 }
@@ -529,7 +530,9 @@ class __$Covid19ItemResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Covid19ItemResponse extends _Covid19ItemResponse {
-  _$_Covid19ItemResponse(this.rawDate, @JsonKey(name: 'name_jp') this.name,
+  _$_Covid19ItemResponse(
+      @JsonKey(name: 'date') this.rawDate,
+      @JsonKey(name: 'name_jp') this.name,
       @JsonKey(name: 'npatients') this.rawNumberOfPatients)
       : super._();
 
@@ -537,6 +540,7 @@ class _$_Covid19ItemResponse extends _Covid19ItemResponse {
       _$_$_Covid19ItemResponseFromJson(json);
 
   @override
+  @JsonKey(name: 'date')
   final String rawDate;
   @override
   @JsonKey(name: 'name_jp')
@@ -585,7 +589,7 @@ class _$_Covid19ItemResponse extends _Covid19ItemResponse {
 
 abstract class _Covid19ItemResponse extends Covid19ItemResponse {
   factory _Covid19ItemResponse(
-          String rawDate,
+          @JsonKey(name: 'date') String rawDate,
           @JsonKey(name: 'name_jp') String name,
           @JsonKey(name: 'npatients') String rawNumberOfPatients) =
       _$_Covid19ItemResponse;
@@ -595,6 +599,7 @@ abstract class _Covid19ItemResponse extends Covid19ItemResponse {
       _$_Covid19ItemResponse.fromJson;
 
   @override
+  @JsonKey(name: 'date')
   String get rawDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'name_jp')
