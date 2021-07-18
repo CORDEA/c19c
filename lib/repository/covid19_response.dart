@@ -31,7 +31,7 @@ class Covid19ItemResponse with _$Covid19ItemResponse {
   Covid19ItemResponse._();
 
   factory Covid19ItemResponse(
-    String date,
+    String rawDate,
     @JsonKey(name: 'name_jp') String name,
     @JsonKey(name: 'npatients') String rawNumberOfPatients,
   ) = _Covid19ItemResponse;
@@ -40,4 +40,5 @@ class Covid19ItemResponse with _$Covid19ItemResponse {
       _$Covid19ItemResponseFromJson(json);
 
   int get numberOfPatients => int.parse(rawNumberOfPatients);
+  DateTime get date => DateTime.parse(rawDate);
 }

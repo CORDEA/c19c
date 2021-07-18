@@ -403,10 +403,12 @@ Covid19ItemResponse _$Covid19ItemResponseFromJson(Map<String, dynamic> json) {
 class _$Covid19ItemResponseTearOff {
   const _$Covid19ItemResponseTearOff();
 
-  _Covid19ItemResponse call(String date, @JsonKey(name: 'name_jp') String name,
+  _Covid19ItemResponse call(
+      String rawDate,
+      @JsonKey(name: 'name_jp') String name,
       @JsonKey(name: 'npatients') String rawNumberOfPatients) {
     return _Covid19ItemResponse(
-      date,
+      rawDate,
       name,
       rawNumberOfPatients,
     );
@@ -422,7 +424,7 @@ const $Covid19ItemResponse = _$Covid19ItemResponseTearOff();
 
 /// @nodoc
 mixin _$Covid19ItemResponse {
-  String get date => throw _privateConstructorUsedError;
+  String get rawDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'name_jp')
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'npatients')
@@ -440,7 +442,7 @@ abstract class $Covid19ItemResponseCopyWith<$Res> {
           Covid19ItemResponse value, $Res Function(Covid19ItemResponse) then) =
       _$Covid19ItemResponseCopyWithImpl<$Res>;
   $Res call(
-      {String date,
+      {String rawDate,
       @JsonKey(name: 'name_jp') String name,
       @JsonKey(name: 'npatients') String rawNumberOfPatients});
 }
@@ -456,14 +458,14 @@ class _$Covid19ItemResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? date = freezed,
+    Object? rawDate = freezed,
     Object? name = freezed,
     Object? rawNumberOfPatients = freezed,
   }) {
     return _then(_value.copyWith(
-      date: date == freezed
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      rawDate: rawDate == freezed
+          ? _value.rawDate
+          : rawDate // ignore: cast_nullable_to_non_nullable
               as String,
       name: name == freezed
           ? _value.name
@@ -485,7 +487,7 @@ abstract class _$Covid19ItemResponseCopyWith<$Res>
       __$Covid19ItemResponseCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String date,
+      {String rawDate,
       @JsonKey(name: 'name_jp') String name,
       @JsonKey(name: 'npatients') String rawNumberOfPatients});
 }
@@ -503,14 +505,14 @@ class __$Covid19ItemResponseCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? date = freezed,
+    Object? rawDate = freezed,
     Object? name = freezed,
     Object? rawNumberOfPatients = freezed,
   }) {
     return _then(_Covid19ItemResponse(
-      date == freezed
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
+      rawDate == freezed
+          ? _value.rawDate
+          : rawDate // ignore: cast_nullable_to_non_nullable
               as String,
       name == freezed
           ? _value.name
@@ -527,7 +529,7 @@ class __$Covid19ItemResponseCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Covid19ItemResponse extends _Covid19ItemResponse {
-  _$_Covid19ItemResponse(this.date, @JsonKey(name: 'name_jp') this.name,
+  _$_Covid19ItemResponse(this.rawDate, @JsonKey(name: 'name_jp') this.name,
       @JsonKey(name: 'npatients') this.rawNumberOfPatients)
       : super._();
 
@@ -535,7 +537,7 @@ class _$_Covid19ItemResponse extends _Covid19ItemResponse {
       _$_$_Covid19ItemResponseFromJson(json);
 
   @override
-  final String date;
+  final String rawDate;
   @override
   @JsonKey(name: 'name_jp')
   final String name;
@@ -545,15 +547,16 @@ class _$_Covid19ItemResponse extends _Covid19ItemResponse {
 
   @override
   String toString() {
-    return 'Covid19ItemResponse(date: $date, name: $name, rawNumberOfPatients: $rawNumberOfPatients)';
+    return 'Covid19ItemResponse(rawDate: $rawDate, name: $name, rawNumberOfPatients: $rawNumberOfPatients)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Covid19ItemResponse &&
-            (identical(other.date, date) ||
-                const DeepCollectionEquality().equals(other.date, date)) &&
+            (identical(other.rawDate, rawDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.rawDate, rawDate)) &&
             (identical(other.name, name) ||
                 const DeepCollectionEquality().equals(other.name, name)) &&
             (identical(other.rawNumberOfPatients, rawNumberOfPatients) ||
@@ -564,7 +567,7 @@ class _$_Covid19ItemResponse extends _Covid19ItemResponse {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(date) ^
+      const DeepCollectionEquality().hash(rawDate) ^
       const DeepCollectionEquality().hash(name) ^
       const DeepCollectionEquality().hash(rawNumberOfPatients);
 
@@ -582,7 +585,7 @@ class _$_Covid19ItemResponse extends _Covid19ItemResponse {
 
 abstract class _Covid19ItemResponse extends Covid19ItemResponse {
   factory _Covid19ItemResponse(
-          String date,
+          String rawDate,
           @JsonKey(name: 'name_jp') String name,
           @JsonKey(name: 'npatients') String rawNumberOfPatients) =
       _$_Covid19ItemResponse;
@@ -592,7 +595,7 @@ abstract class _Covid19ItemResponse extends Covid19ItemResponse {
       _$_Covid19ItemResponse.fromJson;
 
   @override
-  String get date => throw _privateConstructorUsedError;
+  String get rawDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'name_jp')
   String get name => throw _privateConstructorUsedError;
