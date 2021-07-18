@@ -1,6 +1,7 @@
 import 'package:c19c/repository/covid19_api_client.dart';
 import 'package:c19c/repository/covid19_repository.dart';
 import 'package:c19c/ui/home.dart';
+import 'package:c19c/usecase/get_total_patients_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,6 +11,7 @@ void main() {
       providers: [
         apiClientProvider,
         covid19RepositoryProvider,
+        getTotalPatientsUseCaseProvider,
       ],
       child: _App(),
     ),
