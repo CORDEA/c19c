@@ -17,7 +17,8 @@ class Chart<X extends Comparable<X>> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final painters = _XAxisTextPainters(_chartSeries.points);
+    final painters =
+        _XAxisTextPainters(_chartSeries.points, _chartSeries.xAxisFormatter);
     return Column(
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -95,8 +96,10 @@ class BarChartSeries<X extends Comparable<X>> with _$BarChartSeries<X> {
 
   factory BarChartSeries(
     Color color,
-    List<BarChartPoint<X>> points,
-  ) = _BarChartSeries<X>;
+    List<BarChartPoint<X>> points, {
+    required String Function(X) xAxisFormatter,
+    required String Function(num) yAxisFormatter,
+  }) = _BarChartSeries<X>;
 
   num maxY() => points.map((e) => e.y).max;
 }
@@ -175,13 +178,15 @@ class _XAxisPainter extends CustomPainter {
   }
 }
 
-class _XAxisTextPainters {
-  _XAxisTextPainters(List<BarChartPoint> points)
-      : painters = points
+class _XAxisTextPainters<X extends Comparable<X>> {
+  _XAxisTextPainters(
+    List<BarChartPoint<X>> points,
+    String Function(X) xAxisFormatter,
+  ) : painters = points
             .map(
               (e) => TextPainter(
                 text: TextSpan(
-                    text: e.x.toString(),
+                    text: xAxisFormatter(e.x),
                     style: TextStyle(color: Colors.black)),
                 textDirection: TextDirection.ltr,
               )..layout(),

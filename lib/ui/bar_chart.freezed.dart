@@ -17,10 +17,14 @@ class _$BarChartSeriesTearOff {
   const _$BarChartSeriesTearOff();
 
   _BarChartSeries<X> call<X extends Comparable<X>>(
-      Color color, List<BarChartPoint<X>> points) {
+      Color color, List<BarChartPoint<X>> points,
+      {required String Function(X) xAxisFormatter,
+      required String Function(num) yAxisFormatter}) {
     return _BarChartSeries<X>(
       color,
       points,
+      xAxisFormatter: xAxisFormatter,
+      yAxisFormatter: yAxisFormatter,
     );
   }
 }
@@ -32,6 +36,8 @@ const $BarChartSeries = _$BarChartSeriesTearOff();
 mixin _$BarChartSeries<X extends Comparable<X>> {
   Color get color => throw _privateConstructorUsedError;
   List<BarChartPoint<X>> get points => throw _privateConstructorUsedError;
+  String Function(X) get xAxisFormatter => throw _privateConstructorUsedError;
+  String Function(num) get yAxisFormatter => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BarChartSeriesCopyWith<X, BarChartSeries<X>> get copyWith =>
@@ -43,7 +49,11 @@ abstract class $BarChartSeriesCopyWith<X extends Comparable<X>, $Res> {
   factory $BarChartSeriesCopyWith(
           BarChartSeries<X> value, $Res Function(BarChartSeries<X>) then) =
       _$BarChartSeriesCopyWithImpl<X, $Res>;
-  $Res call({Color color, List<BarChartPoint<X>> points});
+  $Res call(
+      {Color color,
+      List<BarChartPoint<X>> points,
+      String Function(X) xAxisFormatter,
+      String Function(num) yAxisFormatter});
 }
 
 /// @nodoc
@@ -59,6 +69,8 @@ class _$BarChartSeriesCopyWithImpl<X extends Comparable<X>, $Res>
   $Res call({
     Object? color = freezed,
     Object? points = freezed,
+    Object? xAxisFormatter = freezed,
+    Object? yAxisFormatter = freezed,
   }) {
     return _then(_value.copyWith(
       color: color == freezed
@@ -69,6 +81,14 @@ class _$BarChartSeriesCopyWithImpl<X extends Comparable<X>, $Res>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as List<BarChartPoint<X>>,
+      xAxisFormatter: xAxisFormatter == freezed
+          ? _value.xAxisFormatter
+          : xAxisFormatter // ignore: cast_nullable_to_non_nullable
+              as String Function(X),
+      yAxisFormatter: yAxisFormatter == freezed
+          ? _value.yAxisFormatter
+          : yAxisFormatter // ignore: cast_nullable_to_non_nullable
+              as String Function(num),
     ));
   }
 }
@@ -80,7 +100,11 @@ abstract class _$BarChartSeriesCopyWith<X extends Comparable<X>, $Res>
           _BarChartSeries<X> value, $Res Function(_BarChartSeries<X>) then) =
       __$BarChartSeriesCopyWithImpl<X, $Res>;
   @override
-  $Res call({Color color, List<BarChartPoint<X>> points});
+  $Res call(
+      {Color color,
+      List<BarChartPoint<X>> points,
+      String Function(X) xAxisFormatter,
+      String Function(num) yAxisFormatter});
 }
 
 /// @nodoc
@@ -98,6 +122,8 @@ class __$BarChartSeriesCopyWithImpl<X extends Comparable<X>, $Res>
   $Res call({
     Object? color = freezed,
     Object? points = freezed,
+    Object? xAxisFormatter = freezed,
+    Object? yAxisFormatter = freezed,
   }) {
     return _then(_BarChartSeries<X>(
       color == freezed
@@ -108,23 +134,49 @@ class __$BarChartSeriesCopyWithImpl<X extends Comparable<X>, $Res>
           ? _value.points
           : points // ignore: cast_nullable_to_non_nullable
               as List<BarChartPoint<X>>,
+      xAxisFormatter: xAxisFormatter == freezed
+          ? _value.xAxisFormatter
+          : xAxisFormatter // ignore: cast_nullable_to_non_nullable
+              as String Function(X),
+      yAxisFormatter: yAxisFormatter == freezed
+          ? _value.yAxisFormatter
+          : yAxisFormatter // ignore: cast_nullable_to_non_nullable
+              as String Function(num),
     ));
   }
 }
 
 /// @nodoc
 
-class _$_BarChartSeries<X extends Comparable<X>> extends _BarChartSeries<X> {
-  _$_BarChartSeries(this.color, this.points) : super._();
+class _$_BarChartSeries<X extends Comparable<X>> extends _BarChartSeries<X>
+    with DiagnosticableTreeMixin {
+  _$_BarChartSeries(this.color, this.points,
+      {required this.xAxisFormatter, required this.yAxisFormatter})
+      : super._();
 
   @override
   final Color color;
   @override
   final List<BarChartPoint<X>> points;
+  @override
+  final String Function(X) xAxisFormatter;
+  @override
+  final String Function(num) yAxisFormatter;
 
   @override
-  String toString() {
-    return 'BarChartSeries<$X>(color: $color, points: $points)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BarChartSeries<$X>(color: $color, points: $points, xAxisFormatter: $xAxisFormatter, yAxisFormatter: $yAxisFormatter)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BarChartSeries<$X>'))
+      ..add(DiagnosticsProperty('color', color))
+      ..add(DiagnosticsProperty('points', points))
+      ..add(DiagnosticsProperty('xAxisFormatter', xAxisFormatter))
+      ..add(DiagnosticsProperty('yAxisFormatter', yAxisFormatter));
   }
 
   @override
@@ -134,14 +186,22 @@ class _$_BarChartSeries<X extends Comparable<X>> extends _BarChartSeries<X> {
             (identical(other.color, color) ||
                 const DeepCollectionEquality().equals(other.color, color)) &&
             (identical(other.points, points) ||
-                const DeepCollectionEquality().equals(other.points, points)));
+                const DeepCollectionEquality().equals(other.points, points)) &&
+            (identical(other.xAxisFormatter, xAxisFormatter) ||
+                const DeepCollectionEquality()
+                    .equals(other.xAxisFormatter, xAxisFormatter)) &&
+            (identical(other.yAxisFormatter, yAxisFormatter) ||
+                const DeepCollectionEquality()
+                    .equals(other.yAxisFormatter, yAxisFormatter)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(color) ^
-      const DeepCollectionEquality().hash(points);
+      const DeepCollectionEquality().hash(points) ^
+      const DeepCollectionEquality().hash(xAxisFormatter) ^
+      const DeepCollectionEquality().hash(yAxisFormatter);
 
   @JsonKey(ignore: true)
   @override
@@ -151,14 +211,19 @@ class _$_BarChartSeries<X extends Comparable<X>> extends _BarChartSeries<X> {
 
 abstract class _BarChartSeries<X extends Comparable<X>>
     extends BarChartSeries<X> {
-  factory _BarChartSeries(Color color, List<BarChartPoint<X>> points) =
-      _$_BarChartSeries<X>;
+  factory _BarChartSeries(Color color, List<BarChartPoint<X>> points,
+      {required String Function(X) xAxisFormatter,
+      required String Function(num) yAxisFormatter}) = _$_BarChartSeries<X>;
   _BarChartSeries._() : super._();
 
   @override
   Color get color => throw _privateConstructorUsedError;
   @override
   List<BarChartPoint<X>> get points => throw _privateConstructorUsedError;
+  @override
+  String Function(X) get xAxisFormatter => throw _privateConstructorUsedError;
+  @override
+  String Function(num) get yAxisFormatter => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BarChartSeriesCopyWith<X, _BarChartSeries<X>> get copyWith =>
@@ -266,7 +331,9 @@ class __$BarChartPointCopyWithImpl<X extends Comparable<X>, $Res>
 
 /// @nodoc
 
-class _$_BarChartPoint<X extends Comparable<X>> implements _BarChartPoint<X> {
+class _$_BarChartPoint<X extends Comparable<X>>
+    with DiagnosticableTreeMixin
+    implements _BarChartPoint<X> {
   _$_BarChartPoint(this.x, this.y);
 
   @override
@@ -275,8 +342,17 @@ class _$_BarChartPoint<X extends Comparable<X>> implements _BarChartPoint<X> {
   final num y;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'BarChartPoint<$X>(x: $x, y: $y)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BarChartPoint<$X>'))
+      ..add(DiagnosticsProperty('x', x))
+      ..add(DiagnosticsProperty('y', y));
   }
 
   @override
