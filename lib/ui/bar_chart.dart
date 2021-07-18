@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'bar_chart.freezed.dart';
 
 const _barMarginBias = 0.3;
+const _chartMinYValue = 0;
 
 class Chart<X extends Comparable<X>> extends StatelessWidget {
   const Chart({
@@ -17,16 +18,30 @@ class Chart<X extends Comparable<X>> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final painters =
+    final xPainters =
         _XAxisTextPainters(_chartSeries.points, _chartSeries.xAxisFormatter);
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    final yPainters =
+        _YAxisTextPainters(_chartSeries.points, _chartSeries.yAxisFormatter);
+    return Row(
       children: [
-        Expanded(child: BarChart(chartSeries: _chartSeries)),
-        SizedBox(
-          height: painters.maxHeight().toDouble(),
-          child: _XAxis(painters: painters),
+        Container(
+          width: yPainters.maxWidth().toDouble(),
+          height: double.infinity,
+          padding: EdgeInsets.only(bottom: xPainters.maxHeight().toDouble()),
+          child: _YAxis(painters: yPainters),
+        ),
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(child: BarChart(chartSeries: _chartSeries)),
+              SizedBox(
+                height: xPainters.maxHeight().toDouble(),
+                child: _XAxis(painters: xPainters),
+              ),
+            ],
+          ),
         ),
       ],
     );
@@ -198,4 +213,77 @@ class _XAxisTextPainters<X extends Comparable<X>> {
   num maxWidth() => painters.map<num>((e) => e.width).max;
 
   num maxHeight() => painters.map<num>((e) => e.height).max;
+}
+
+class _YAxis extends StatelessWidget {
+  const _YAxis({
+    Key? key,
+    required _YAxisTextPainters painters,
+  })  : _painters = painters,
+        super(key: key);
+
+  final _YAxisTextPainters _painters;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(painter: _YAxisPainter(_painters));
+  }
+}
+
+class _YAxisPainter extends CustomPainter {
+  _YAxisPainter(this._painters);
+
+  final _YAxisTextPainters _painters;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    if (size.isEmpty) {
+      return;
+    }
+
+    _painters.maxValuePainter.paint(
+      canvas,
+      Offset(0, 0),
+    );
+    _painters.minValuePainter.paint(
+      canvas,
+      Offset(0, size.height - _painters.minValuePainter.height),
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return !identical(this, oldDelegate) ||
+        (oldDelegate is! _YAxisPainter ||
+            _painters.maxValuePainter != oldDelegate._painters.maxValuePainter);
+  }
+}
+
+class _YAxisTextPainters<X extends Comparable<X>> {
+  _YAxisTextPainters(
+    List<BarChartPoint<X>> points,
+    String Function(num) yAxisFormatter,
+  )   : maxValuePainter = TextPainter(
+          text: TextSpan(
+            text: yAxisFormatter(points.map((e) => e.y).max),
+            style: TextStyle(color: Colors.black),
+          ),
+          textDirection: TextDirection.ltr,
+        )..layout(),
+        minValuePainter = TextPainter(
+          text: TextSpan(
+            text: yAxisFormatter(_chartMinYValue),
+            style: TextStyle(color: Colors.black),
+          ),
+          textDirection: TextDirection.ltr,
+        )..layout();
+
+  late final TextPainter maxValuePainter;
+  late final TextPainter minValuePainter;
+
+  num maxWidth() =>
+      [maxValuePainter, minValuePainter].map<num>((e) => e.width).max;
+
+  num maxHeight() =>
+      [maxValuePainter, minValuePainter].map<num>((e) => e.height).max;
 }
