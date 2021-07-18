@@ -1,6 +1,5 @@
-import 'package:c19c/repository/covid19_repository.dart';
-import 'package:c19c/repository/covid19_response.dart';
 import 'package:c19c/ui/bar_chart.dart';
+import 'package:c19c/usecase/get_total_patients_use_case.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,35 +8,28 @@ final homeViewModelProvider = ChangeNotifierProvider<HomeViewModel>(
 );
 
 class HomeViewModel extends ChangeNotifier {
-  HomeViewModel(this._repository) {
+  HomeViewModel(this._getTotalPatientsUseCase) {
     _load(forceRefresh: false);
   }
 
-  final Covid19Repository _repository;
+  final GetTotalPatientsUseCase _getTotalPatientsUseCase;
 
   List<BarChartPoint<DateTime>> _barChartPoints = [];
 
   List<BarChartPoint<DateTime>> get barChartPoints => _barChartPoints;
 
   Future<void> _load({required bool forceRefresh}) async {
-    final List<Covid19ItemResponse> items;
+    final Map<DateTime, int> items;
     try {
-      items = await _repository.findAll(
-        dataName: null,
-        date: null,
+      items = await _getTotalPatientsUseCase.execute(
         forceRefresh: forceRefresh,
       );
     } catch (_) {
       return;
     }
 
-    _barChartPoints = items
-        .map(
-          (e) => BarChartPoint(
-            DateTime.parse(e.date),
-            e.numberOfPatients,
-          ),
-        )
+    _barChartPoints = items.entries
+        .map((e) => BarChartPoint(e.key, e.value))
         .take(30)
         .toList(growable: false);
     notifyListeners();
