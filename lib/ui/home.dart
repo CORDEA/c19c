@@ -22,25 +22,36 @@ class _HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Home')),
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Selector<HomeViewModel, List<BarChartPoint<DateTime>>>(
-              builder: (_, points, __) => Chart(
-                chartSeries: BarChartSeries<DateTime>(
-                  Colors.blue,
-                  points,
-                  xAxisFormatter: _dateFormatter.format,
-                  yAxisFormatter: _numberFormatter.format,
-                ),
-              ),
-              selector: (_, viewModel) => viewModel.barChartPoints,
-            ),
-          ),
-        ],
+      body: Selector<HomeViewModel, LoadingState>(
+        selector: (_, viewModel) => viewModel.loadingState,
+        builder: (_, loadingState, __) {
+          switch (loadingState) {
+            case LoadingState.loading:
+              return const Center(child: CircularProgressIndicator());
+            case LoadingState.loaded:
+              return Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  AspectRatio(
+                    aspectRatio: 16 / 9,
+                    child:
+                        Selector<HomeViewModel, List<BarChartPoint<DateTime>>>(
+                      builder: (_, points, __) => Chart(
+                        chartSeries: BarChartSeries<DateTime>(
+                          Colors.blue,
+                          points,
+                          xAxisFormatter: _dateFormatter.format,
+                          yAxisFormatter: _numberFormatter.format,
+                        ),
+                      ),
+                      selector: (_, viewModel) => viewModel.barChartPoints,
+                    ),
+                  ),
+                ],
+              );
+          }
+        },
       ),
     );
   }

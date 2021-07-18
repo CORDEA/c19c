@@ -14,11 +14,16 @@ class HomeViewModel extends ChangeNotifier {
 
   final GetTotalPatientsUseCase _getTotalPatientsUseCase;
 
+  LoadingState _loadingState = LoadingState.loading;
+
+  LoadingState get loadingState => _loadingState;
+
   List<BarChartPoint<DateTime>> _barChartPoints = [];
 
   List<BarChartPoint<DateTime>> get barChartPoints => _barChartPoints;
 
   Future<void> _load({required bool forceRefresh}) async {
+    _loadingState = LoadingState.loading;
     final Map<DateTime, int> items;
     try {
       items = await _getTotalPatientsUseCase.execute(
@@ -32,6 +37,12 @@ class HomeViewModel extends ChangeNotifier {
         .map((e) => BarChartPoint(e.key, e.value))
         .take(30)
         .toList(growable: false);
+    _loadingState = LoadingState.loaded;
     notifyListeners();
   }
+}
+
+enum LoadingState {
+  loading,
+  loaded,
 }
