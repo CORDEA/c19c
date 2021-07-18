@@ -15,9 +15,6 @@ class HomePage extends StatelessWidget {
 }
 
 class _HomePage extends StatelessWidget {
-  static final _dateFormatter = DateFormat('MM/dd');
-  static final _numberFormatter = NumberFormat.compact();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,29 +26,43 @@ class _HomePage extends StatelessWidget {
             case LoadingState.loading:
               return const Center(child: CircularProgressIndicator());
             case LoadingState.loaded:
-              return Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child:
-                        Selector<HomeViewModel, List<BarChartPoint<DateTime>>>(
-                      builder: (_, points, __) => Chart(
-                        chartSeries: BarChartSeries<DateTime>(
-                          Colors.blue,
-                          points,
-                          xAxisFormatter: _dateFormatter.format,
-                          yAxisFormatter: _numberFormatter.format,
-                        ),
-                      ),
-                      selector: (_, viewModel) => viewModel.barChartPoints,
-                    ),
-                  ),
-                ],
-              );
+              return const _HomeLoadedPage();
           }
         },
+      ),
+    );
+  }
+}
+
+class _HomeLoadedPage extends StatelessWidget {
+  const _HomeLoadedPage({Key? key}) : super(key: key);
+
+  static final _dateFormatter = DateFormat('MM/dd');
+  static final _numberFormatter = NumberFormat.compact();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          AspectRatio(
+            aspectRatio: 16 / 9,
+            child: Selector<HomeViewModel, List<BarChartPoint<DateTime>>>(
+              builder: (_, points, __) => Chart(
+                chartSeries: BarChartSeries<DateTime>(
+                  Colors.blue,
+                  points,
+                  xAxisFormatter: _dateFormatter.format,
+                  yAxisFormatter: _numberFormatter.format,
+                ),
+              ),
+              selector: (_, viewModel) => viewModel.barChartPoints,
+            ),
+          ),
+        ],
       ),
     );
   }

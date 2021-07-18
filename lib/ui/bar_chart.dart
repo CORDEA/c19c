@@ -14,6 +14,9 @@ class Chart<X extends Comparable<X>> extends StatelessWidget {
   })  : _chartSeries = chartSeries,
         super(key: key);
 
+  static const double _yAxisPadding = 4;
+  static const double _xAxisPadding = 4;
+
   final BarChartSeries<X> _chartSeries;
 
   @override
@@ -27,15 +30,18 @@ class Chart<X extends Comparable<X>> extends StatelessWidget {
         Container(
           width: yPainters.maxWidth().toDouble(),
           height: double.infinity,
-          padding: EdgeInsets.only(bottom: xPainters.maxHeight().toDouble()),
+          padding: EdgeInsets.only(
+              bottom: xPainters.maxHeight().toDouble() + _xAxisPadding),
           child: _YAxis(painters: yPainters),
         ),
+        SizedBox(width: _yAxisPadding),
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(child: BarChart(chartSeries: _chartSeries)),
+              SizedBox(height: _xAxisPadding),
               SizedBox(
                 height: xPainters.maxHeight().toDouble(),
                 child: _XAxis(painters: xPainters),
