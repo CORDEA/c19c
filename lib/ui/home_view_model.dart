@@ -24,7 +24,7 @@ class HomeViewModel extends ChangeNotifier {
 
   Future<void> _load({required bool forceRefresh}) async {
     _loadingState = LoadingState.loading;
-    final Map<DateTime, int> items;
+    final List<Covid19TotalPatients> items;
     try {
       items = await _getTotalPatientsUseCase.execute(
         forceRefresh: forceRefresh,
@@ -33,9 +33,10 @@ class HomeViewModel extends ChangeNotifier {
       return;
     }
 
-    _barChartPoints = items.entries
-        .map((e) => BarChartPoint(e.key, e.value))
-        .take(30)
+    final basis = DateTime.now().subtract(Duration(days: 30));
+    _barChartPoints = items
+        .skipWhile((value) => value.date.isBefore(basis))
+        .map((e) => BarChartPoint(e.date, e.todayPatients))
         .toList(growable: false);
     _loadingState = LoadingState.loaded;
     notifyListeners();
